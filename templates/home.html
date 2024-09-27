@@ -1,0 +1,39 @@
+{{define "Home"}}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #000;
+            color: #fff;
+        }
+        .btn-primary {
+            background-color: #ff0000;
+            border-color: #ff0000;
+        }
+        .btn-primary:hover {
+            background-color: #cc0000;
+            border-color: #cc0000;
+        }
+    </style>
+</head>
+<body>
+    {{range .}}
+    <div class="container text-center mt-5">
+        <h1 class="mb-4">Boa tarde senhor {{.Nome}}, o senhor esta
+            prestes a participar de sua solenidade, por favor clique no
+            botão abaixo e siga as instruções! Tenha uma boa solenidade!
+        </h1>
+        <button class="btn btn-primary">Participar da solenidade</button>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    {{end}}
+</body>
+</html>
+{{end}}
