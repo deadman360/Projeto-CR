@@ -7,32 +7,29 @@ import (
 )
 
 type Corretor struct {
-	Id, Creci int
-	Nome      string
+	Id   int
+	Nome string
 }
 
 func Search(id string) Corretor {
 	corr := Corretor{}
 	dbs := db.DbConnect()
 	defer dbs.Close()
-	idn, err := strconv.Atoi(id)
+	query, err := dbs.Query("select * from solen where id=$1", id)
 	if err != nil {
 		panic(err.Error())
 	}
-	query, err := dbs.Query("select * from solen where id=$1", idn)
-	if err != nil {
-		panic(err.Error())
-	}
-	var creci int
 	var nome string
-	for query.Next(){
-	query.Scan(&id, &creci, &nome)
+	for query.Next() {
+		query.Scan(&id, &nome)
 
-	corr.Nome = nome
+		corr.Nome = nome
 
-	corr.Id = idn
+		corr.Id, err = strconv.Atoi(id)
+		if err != nil {
+			panic(err.Error())
+		}
 
-	corr.Creci = creci
 	}
 
 	return corr

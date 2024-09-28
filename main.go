@@ -4,6 +4,7 @@ import (
 	"net/http"
 
 	"github.com/deadman360/projetoLPSol/routes"
+	_ "github.com/lib/pq"
 )
 
 func main() {
