@@ -1,19 +1,21 @@
 package controllers
 
 import (
-	"fmt"
+	"encoding/json"
 	"html/template"
 	"net/http"
 
+	"github.com/deadman360/projetoLPSol/database"
 	"github.com/deadman360/projetoLPSol/models"
+	"github.com/gorilla/mux"
 )
 
 var templ = template.Must(template.ParseGlob("templates/*.html"))
-func Hello(w http.ResponseWriter, r *http.Request){
-	fmt.Fprint(w, "Hello")
-}
-func Home(w http.ResponseWriter, r *http.Request) {
-	id := r.URL.Query().Get("id")
-	corretor := models.Search(id)
-	templ.ExecuteTemplate(w, "Home", corretor)
+
+func LandingPage(w http.ResponseWriter, r *http.Request) {
+	vars := mux.Vars(r)
+	id := vars["id"]
+	var c models.Corretor
+	database.Db.First(&c, id)
+	json.NewEncoder(w).Encode(c)
 }

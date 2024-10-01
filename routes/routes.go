@@ -1,13 +1,12 @@
 package routes
 
 import (
-	"net/http"
-
 	"github.com/deadman360/projetoLPSol/controllers"
+	"github.com/gorilla/mux"
 )
 
 func HandleRequest() {
-	http.HandleFunc("/", controllers.Hello)
-	http.HandleFunc("/home", controllers.Home)
-	
+	r := mux.NewRouter()
+	r.HandleFunc("/LP/{id}", controllers.LandingPage)
+
 }
